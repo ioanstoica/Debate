@@ -1,0 +1,3 @@
+Refactoring regulat
+
+Evitare SQL injection

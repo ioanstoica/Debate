@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Debate</title>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-app="commentsApp" ng-controller="commentsCtrl">
+        <p>Comments list:</p>
+        <ul>
+            <li ng-repeat="comment in comments">
+                {{comment.tip}}: {{ comment.text }}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var app = angular.module('commentsApp', []);
+
+        app.controller('commentsCtrl', function ($scope, $http) 
+        {
+            $http({
+                method: "GET",
+                url: "http://localhost:3000"
+            }).then(function mySuccess(response) {
+                $scope.comments = response.data;
+            }, function myError(response) {
+                console.log(response.statusText);
+            });
+        });
+    </script>
+</body>
+
+</html>
