@@ -1,3 +1,7 @@
 Refactoring regulat
 
 Evitare SQL injection
+
+Folosesc POST raw JSON sau form_data?
+Momentan folosesc mereu raw JSON
+

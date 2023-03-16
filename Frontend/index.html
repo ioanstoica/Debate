@@ -8,20 +8,35 @@
 </head>
 
 <body>
-    <div ng-app="commentsApp" ng-controller="commentsCtrl">
-        <p>Comments list:</p>
-        <ul>
-            <li ng-repeat="comment in comments">
-                {{comment.tip}}: {{ comment.text }}
-            </li>
-        </ul>
+    <div ng-app="commentsApp">
+        <div ng-controller="commentsCtrl">
+            <p>Comments list:</p>
+            <ul>
+                <li ng-repeat="comment in comments">
+                    {{comment.tip}}: {{ comment.text }}
+                </li>
+            </ul>
+        </div>
+        <div ng-controller="myController">
+            <p>Add comment:</p>
+            <form ng-submit="submitPost()">
+                <div>
+                    <label for="tip">Tip</label>
+                    <input type="text" id="tip" name="tip" ng-model="postData.tip">
+                </div>
+                <div>
+                    <label for="text">Text</label>
+                    <input type="text" id="text" name="text" ng-model="postData.text"></input>
+                </div>
+                <button type="submit">Trimite</button>
+            </form>
+        </div>
     </div>
 
     <script>
         var app = angular.module('commentsApp', []);
 
-        app.controller('commentsCtrl', function ($scope, $http) 
-        {
+        app.controller('commentsCtrl', function ($scope, $http) {
             $http({
                 method: "GET",
                 url: "http://localhost:3000"
@@ -30,6 +45,22 @@
             }, function myError(response) {
                 console.log(response.statusText);
             });
+        });
+
+        app.controller('myController', function ($scope, $http) {
+            $scope.apiUrl = 'http://localhost:3000';
+            $scope.postData = {};
+
+            $scope.submitPost = function () {
+                // '{\"tip\":\"" + $scope.postData.tip + "\",\"text\":\"" + $scope.postData.text + "\"}'
+                $http.post($scope.apiUrl, '{"tip":"pro", "text":"pro text", "id_parinte": "1"}')
+                    .then(function (response) {
+                        console.log(response.data);
+                    }, function (error) {
+                        console.error(error);
+                    });
+            }
+
         });
     </script>
 </body>
