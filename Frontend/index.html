@@ -52,8 +52,15 @@
             $scope.postData = {};
 
             $scope.submitPost = function () {
-                // '{\"tip\":\"" + $scope.postData.tip + "\",\"text\":\"" + $scope.postData.text + "\"}'
-                $http.post($scope.apiUrl, '{"tip":"pro", "text":"pro text", "id_parinte": "1"}')
+                $scope.postData.id_parinte = "1";
+                json = JSON.stringify($scope.postData);
+                console.log(json)
+
+                $http.post($scope.apiUrl, json, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
                     .then(function (response) {
                         console.log(response.data);
                     }, function (error) {
