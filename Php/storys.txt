@@ -1,2 +1,0 @@
-1. As a user, I want can add a comment. 
-2. As a user, I want can delete comments.
