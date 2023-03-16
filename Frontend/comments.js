@@ -1,5 +1,6 @@
 var app = angular.module('commentsApp', []);
 var apiUrl = 'http://localhost:3000';
+
 app.controller('commentsCtrl', function ($scope, $http) {
     $http({
         method: "GET",
