@@ -1,9 +1,9 @@
 var app = angular.module('commentsApp', []);
-
+var apiUrl = 'http://localhost:3000';
 app.controller('commentsCtrl', function ($scope, $http) {
     $http({
         method: "GET",
-        url: "http://localhost:3000"
+        url: apiUrl
     }).then(function mySuccess(response) {
         $scope.comments = response.data;
     }, function myError(response) {
@@ -12,7 +12,7 @@ app.controller('commentsCtrl', function ($scope, $http) {
 });
 
 app.controller('postController', function ($scope, $http) {
-    $scope.apiUrl = 'http://localhost:3000';
+    $scope.apiUrl = apiUrl;
     $scope.postData = {};
     $scope.postData.id_parinte = "1";
 
